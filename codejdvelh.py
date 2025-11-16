@@ -59,8 +59,8 @@ if int(reponse_1) == 1:
         print("Vous vous êtes fait tuer par un animal sauvage pendant votre sommeil")
         exit()
     
-    else:
-        print("Choix invalide.")
+    elif int(reponse_1_1) != 1 and int(reponse_1_1) != 2:
+        print("Choix invalide!")
         exit()
 
        
@@ -88,28 +88,25 @@ if int(reponse_1) == 2:
         print("\nVous partez dans la direction opposée")
         print("Vous recroisez l'étrangé à un tournant, qui vous regarde d'un air menaçant...")
         print("Il séagissait d'un piège... Les moches sont toujours vicieux...")
-        print("L'homme s'élance ver vous, armé d'une dague !!!")
-        print("Vous décidez de: ")
-        print("1)Se diriger vers la voie \n 2)")
-        reponse_1_1_2 = input("Que choisissez-vous ? (sélectionnez le numéro) : ")
-    
-    else:
-        print("Choix invalide.")
+   
+    elif int(reponse_1_1) != 1 and int(reponse_1_1) != 2:
+        print("Choix invalide!")
         exit()
 
 
-    #combat
+    #combat 1
     print("\nL'homme s'élance ver vous, armé d'une dague !!!")
     print("Vous devez vous battre !!!")
     pv_du_moche = 10
     stam = 100
-    while pv <= 0 or pv_du_moche > 0:
+    pv = 20
+    épée = 2
+    while pv_du_moche >= 0:
         #defense:
         if stam <= 0:
             print ("\nvous n'avez pas la force d'esquiver...")
-            print(stam)
             pv -= 5
-            print("Il vous reste: " + str(pv) + " pv.")
+        
         else:    
             attaque = randint(1,2)
             print("\nAttention, escquivez!!!")
@@ -117,8 +114,9 @@ if int(reponse_1) == 2:
             reponse_1_1 = int(input("Que choisissez-vous? (sélectionnez le numéro) : "))
             if reponse_1_1 == attaque:
                 chance = randint(1, 100)
+               
                 if chance > 90:
-                    pv -= 2 
+                    pv -=  2 
                     print("\nBonne esquive !!! Mais vous êtes tout de même touché !!!")
                     print("Il vous reste: " + str(pv) + " pv.")
                 else:
@@ -126,10 +124,192 @@ if int(reponse_1) == 2:
             if reponse_1_1 != attaque:
                 pv -= 5
                 print("\nMauvais coté...Vous subissez d'imortant dommage... ")
+                print("Il vous reste: " + str(pv) + " pv.")
             
-            else:
-                print("Choix invalide, veuillez réessayer.")
+            elif int(reponse_1_1) != 1 and int(reponse_1_1) != 2:
+                print("Choix invalide!")
                 exit()
+            
+        if pv <= 0:
+            print("\nVous êtes mort... GAME OVER!!!")
+            exit()
+    
+        #attaque
+        if stam <= 0:
+            print("\nA votre tour, choisissez votre attaque, mais vous n'avez plus d'endurance... Vous devez vous reposer")
+            stam += 20 
+        else:
+            print("\nA votre tour, choisissez votre attaque")
+            print("1)attaque vive\n2)attaque basique\n3)attaque lourde\n4)se reposer ")
+            attaque = (input("choisissez une action: "))
+            if attaque == "1":
+                stam -= 10
+                chance = randint (1,100)
+                if chance > 90:
+                    print ("\nvotre attaque échoue...")
+                else:
+                    print("\nBravo vous infligez des dégâts!!! ")
+                    pv_du_moche -= épée   
+                
+            if attaque == "2":
+                stam -= 20
+                chance = randint (1,100)
+                if chance > 70:
+                    print ("\nvotre attaque échoue...")  
+                else:
+                    print("\nBravo vous infligez des dégâts!!! ")
+                    pv_du_moche -= épée + 3
+
+            if attaque == "3":
+                stam -= 30
+                chance = randint (1,100)
+                if chance > 25:
+                    print ("\nvotre attaque échoue...") 
+                else:
+                    print("\nBravo vous infligez des dégâts!!! ")
+                    pv_du_moche -= épée + 6
+
+            if attaque == "4":
+                print("\nVous vous reposez et regagnez de l'endurance")
+                stam += 30  
+
+            elif int(attaque) != 1 and int(attaque) != 2 and int(attaque) != 3 and int(attaque) != 4:
+                print("Choix invalide!")
+                exit()  
+   
+
+    if pv_du_moche <= 0:
+        print("\nFélicitation, vous avez vaincu l'ennemi !!!")
+        print("Vous fouillez le corps de l'ennemi...")
+        print("Vous récupérez sa dague ainsi que de la nourriture")
+        épée += 20
+        print("Vous décidez de : ")
+        print(" 1) Mangez pour vous restorez.\n 2) Laissez pour le prochain.")   
+        reponse_1_1 = input("Que choisissez-vous? (sélectionnez le numéro) : ")  
+        if int(reponse_1_1) == 1:
+                pv += 10
+                print("\nVous mangez et vous vous restaurez.")
+                pv += 10
+        if int(reponse_1_1) == 2:
+                print("\nVous laissez la nourriture pour le prochain.")
+        elif int(reponse_1_1) != 1 and int(reponse_1_1) != 2:
+            print("Choix invalide!")
+            exit() 
+
+
+        print("\nVous êtes encore completement perdu mais au moins vous êtes en vie...")   
+        print("La nuit commence à tomber, vous décidez de chercher un abris pour la nuit...")  
+        print("Après plusieurs minutes de marche, vous trouvez une grotte sombre à l'abris pour la nuit.")
+        print("Vous décidez de : ")
+        print(" 1) Vous y réfugier pour la nuit.\n 2) De passer la nuit à l'exterieur malgré la pluie.")   
+        reponse_1_1 = input("Que choisissez-vous? (sélectionnez le numéro) : ")  
+        
+        #branche 2-2-1
+        if int(reponse_1_1) == 1:
+            print("\nVous entrez dans la grotte")
+            print("Après plusieurs minutes de vérifications, vous appercever une faible lueur dans la pénombre")
+            print("Vous êtes appeuré et intrigué par cette dernière.")
+            print("Une voix mystérieuse vous appelle: 'v..vv...viens par ici "+ str(nom) + "'")
+   
+        #branche 2-2-2
+        if int(reponse_1_1) == 2:
+            print("\nVous restez dehors sous la pluie.")
+            print("Après plusieurs minutes vous vous endormez.")
+            print("Vous voyez une lumière au fond du tunnel... GAME OVER!!!")
+            print("Vous vous êtes fait tuer par un animal sauvage pendant votre sommeil")
+            exit()
+
+
+        elif int(reponse_1_1) != 1 and int(reponse_1_1) != 2:
+            print("Choix invalide!")
+            exit()
+
+elif int(reponse_1) != 1 and int(reponse_1) != 2:
+    print("Choix invalide!")
+    exit()
+       
+print("\nLa chose semble vous connaître...")
+print("En sait t-elle davantage sur vous et sur ce monde?")
+print("Vous descidez de vous avancer vers le voie...")
+print("Vous harpentez de long corridors humides et sombres...\nSoudain, vous arrivez dans une vaste salle éclairée par des torches.")    
+print("Au centre de cette pièce se tient une silhouette encapuchonnée...")
+print("Elle ne semble pas hostile...\nElle vous fait signe de vous approcher... \nVous vous avancez prudemment...")
+print("\n'Cela fait bien longtemps que je n'ai pas vu un mortel...' dit la créature d'une voix rauque." )
+print("'Je suis l'Archiviste, gardien des savoirs oubliés de cet intermonde.'" )
+
+print("Vous demandez:")
+print(" 1) Pouvez vous me parlez plus de ce qu'est cet intermonde?.\n 2) Mais qui êtes vous au juste? ")
+reponse_1 = input("Que choisissez vous? (sélectionnez le numéro): ")
+
+#brance 2-1
+if int(reponse_1) == 1:
+    print("\n'L'intermonde est un lieu entre les mondes, un carrefour pour les âmes perdues' répond l'Archivister" )
+    print("'Certaines personnes y sont envoyées pour expier leurs fautes, d'autres errent ici après la mort, incapables de trouver la paix.'" )
+#branche 2-2
+if int(reponse_1) == 2:
+    print("\n'Je suis l'Archiviste, gardien des savoirs oubliés de cet intermonde.' répond la créature" )
+    print("'Mon rôle est de préserver les connaissances anciennes et d'aider ceux qui cherchent des réponses.'" )
+    print("ainsi que de guider les âmes égarées comme la vôtre, à retrouvez la voie de la paix éternelle'" )
+
+elif int(reponse_1) != 1 and int(reponse_1) != 2:
+        print("Choix invalide!")
+        exit()
+
+print("\nAvec ces simples mots, vous comprenez que vous êtes mort...")
+print("Mais vous ne vous rappelez toujours pas qui vous étiez de votre vivant...")
+print("Vous hésitez à lui montrer votre amulette..., qui semble avoir une signification particulière ici...")
+print("Vous choisissez:")
+print(" 1) De lui montrer.\n 2) De guarder le secret. ")
+reponse_1 = input("Que choisissez vous? (sélectionnez le numéro): ")
+
+if int(reponse_1) == 1:
+    print("\nL'Archiviste regarde l'amulette avec une expression de surprise." )
+    print("Seulement, cette expression de surprise se transforme vite en un regard farouche.." )
+    print("La chose vous vixe dans les yeux avec un regard noir... Vous vouillez maintenant son visage, qui n'a rien d'humain..." )
+    print("'Cette amulette est une relique perdue... ou plustôt volée...' dit la créature" )
+    print("'Volé il y a des milier d'années, au prit de la vie de nombreux des miens...Tu payerais pour les crîmes de tes ancêtres!!!!'" )
+    print("La créature se jette sur vous, furieuse de votre possession de l'amulette...")
+    print("Vous devez vous battre pour votre survie!!!")
+
+    #combat 2
+    print("\nLe monstre s'élance ver vous!!!")
+    print("Vous devez vous battre !!!")
+    pv_du_moche = 100
+    stam = 100
+    
+    
+    while pv_du_moche >= 0:
+        #defense:
+        if stam <= 0:
+            print ("\nvous n'avez pas la force d'esquiver...")
+            pv -= 5
+        
+        else:    
+            attaque = randint(1,2)
+            print("\nAttention, escquivez!!!")
+            print("vous esquivez: \n1)vers la droite \n2)vers la gauche")
+            reponse_1_1 = int(input("Que choisissez-vous? (sélectionnez le numéro) : "))
+            if reponse_1_1 == attaque:
+                chance = randint(1, 100)
+                print(chance)
+                if chance > 90:
+                    pv -=  2 
+                    print("\nBonne esquive !!! Mais vous êtes tout de même touché !!!")
+                    print("Il vous reste: " + str(pv) + " pv.")
+                else:
+                    print ("\nBien esquivé!!! Vous ne subissez aucun dommage!!!")
+            if reponse_1_1 != attaque:
+                pv -= 5
+                print("\nMauvais coté...Vous subissez d'imortant dommage... ")
+                print("Il vous reste: " + str(pv) + " pv.")
+            
+            elif int(reponse_1_1) != 1 and int(reponse_1_1) != 2:
+                print("Choix invalide!")
+                exit()
+            
+        if pv <= 0:
+            print("\nVous êtes mort... GAME OVER!!!")
+            exit()
     
         #attaque
         if stam <= 0:
@@ -165,184 +345,14 @@ if int(reponse_1) == 2:
                 else:
                     print("\nBravo vous infligez des dégâts!!! ")
                     pv_du_moche -= épée + 6
+
             if attaque == "4":
                 print("\nVous vous reposez et regagnez de l'endurance")
-                stam += 30     
-            else:
-                print("Choix invalide.")
+                stam += 30  
+
+            elif int(attaque) != 1 and int(attaque) != 2 and int(attaque) != 3 and int(attaque) != 4:
+                print("Choix invalide!")
                 exit()  
-    if pv <= 0:
-        print("\nVous êtes mort... GAME OVER!!!")
-        exit()
-
-    if pv_du_moche <= 0:
-        print("\nFélicitation, vous avez vaincu l'ennemi !!!")
-        print("Vous fouillez le corps de l'ennemi...")
-        print("Vous récupérez sa dague ainsi que de la nourriture")
-        épée += 20
-        print("Vous décidez de : ")
-        print(" 1) Mangez pour vous restorez.\n 2) Laissez pour le prochain.")   
-        reponse_1_1 = input("Que choisissez-vous? (sélectionnez le numéro) : ")  
-        if int(reponse_1_1) == 1:
-                pv += 10
-                print("\nVous mangez et vous vous restaurez.")
-                pv += 10
-        if int(reponse_1_1) == 2:
-                print("\nVous laissez la nourriture pour le prochain.")
-        else:
-            print("Choix invalide.")
-            exit()  
-
-
-        print("\nVous êtes encore completement perdu mais au moins vous êtes en vie...")   
-        print("La nuit commence à tomber, vous décidez de chercher un abris pour la nuit...")  
-        print("Après plusieurs minutes de marche, vous trouvez une grotte sombre à l'abris pour la nuit.")
-        print("Vous décidez de : ")
-        print(" 1) Vous y réfugier pour la nuit.\n 2) De passer la nuit à l'exterieur malgré la pluie.")   
-        reponse_1_1 = input("Que choisissez-vous? (sélectionnez le numéro) : ")  
-        
-        #branche 2-2-1
-        if int(reponse_1_1) == 1:
-            print("\nVous entrez dans la grotte")
-            print("Après plusieurs minutes de vérifications, vous appercever une faible lueur dans la pénombre")
-            print("Vous êtes appeuré et intrigué par cette dernière.")
-            print("Une voix mystérieuse vous appelle: 'v..vv...viens par ici "+ str(nom) + "'")
-   
-        #branche 2-2-2
-        if int(reponse_1_1) == 2:
-            print("\nVous restez dehors sous la pluie.")
-            print("Après plusieurs minutes vous vous endormez.")
-            print("Vous voyez une lumière au fond du tunnel... GAME OVER!!!")
-            print("Vous vous êtes fait tuer par un animal sauvage pendant votre sommeil")
-            exit()
-
-
-        else:
-            print("Choix invalide.")
-            exit()
-
-    print("\nLa chose semble vous connaître...")
-    print("En sait t-elle davantage sur vous et sur ce monde?")
-    print("Vous descidez de vous avancer vers le voie...")
-    print("Vous harpentez de long corridors humides et sombres..." \
-    "nSoudain, vous arrivez dans une vaste salle éclairée par des torches.")    
-    print("Au centre de cette pièce se tient une silhouette encapuchonnée...")
-    print("Elle ne semble pas hostile..." \
-    "Elle vous fait signe de vous approcher..." \
-    "nVous vous avancez prudemment...")
-    print("\n'Cela fait bien longtemps que je n'ai pas vu un mortel...' dit la créature d'une voix rauque." )
-    print("'Je suis l'Archiviste, gardien des savoirs oubliés de cet intermonde.'" )
-    
-    print("Vous demandez:")
-    print(" 1) Pouvez vous me parlez plus de ce qu'est cet intermonde?.\n 2) Mais qui êtes vous au juste? ")
-    reponse_1 = input("Que choisissez vous? (sélectionnez le numéro): ")
-
-    #brance 2-1
-    if int(reponse_1) == 1:
-        print("\n'L'intermonde est un lieu entre les mondes, un carrefour pour les âmes perdues' répond l'Archivister" )
-        print("'Certaines personnes y sont envoyées pour expier leurs fautes, d'autres errent ici après la mort, incapables de trouver la paix.'" )
-    #branche 2-2
-    if int(reponse_1) == 2:
-        print("\n'Je suis l'Archiviste, gardien des savoirs oubliés de cet intermonde.' répond la créature" )
-        print("'Mon rôle est de préserver les connaissances anciennes et d'aider ceux qui cherchent des réponses.'" )
-        print("ainsi que de guider les âmes égarées comme la vôtre, à retrouvez la voie de la paix éternelle'" )
-    
-    else:
-        print("Choix invalide.")
-        exit()
-
-print("\nAvec ces simples mots, vous comprenez que vous êtes mort...")
-print("Mais vous ne vous rappelez toujours pas qui vous étiez de votre vivant...")
-print("Vous hésitez à lui montrer votre amulette..., qui semble avoir une signification particulière ici...")
-print("Vous choisissez:")
-print(" 1) De lui montrer.\n 2) De guarder le secret. ")
-reponse_1 = input("Que choisissez vous? (sélectionnez le numéro): ")
-
-if int(reponse_1) == 1:
-    print("\nL'Archiviste regarde l'amulette avec une expression de surprise." )
-    print("Seulement, cette expression de surprise se transforme vite en un regard farouche.." )
-    print("La chose vous vixe dans les yeux avec un regard noir... Vous vouillez maintenant son visage, qui n'a rien d'humain..." )
-    print("'Cette amulette est une relique perdue... ou plustôt volée...' dit la créature" )
-    print("'Volé il y a des milier d'années, au prit de la vie de nombreux des miens...Tu payerais pour les crîmes de tes ancêtres!!!!'" )
-    print("La créature se jette sur vous, furieuse de votre possession de l'amulette...")
-    print("Vous devez vous battre pour votre survie!!!")
-
-    #combat
-    print("\nL'homme s'élance ver vous, armé d'une dague !!!")
-    print("Vous devez vous battre !!!")
-    pv_du_moche = 100
-    stam = 100
-    while pv <= 0 or pv_du_moche > 0:
-        #defense:
-        if stam <= 0:
-            print ("\nvous n'avez pas la force d'esquiver...")
-            print(stam)
-            pv -= 5
-            print("Il vous reste: " + str(pv) + " pv.")
-        else:    
-            attaque = randint(1,2)
-            print("\nAttention, escquivez!!!")
-            print("vous esquivez: \n1)vers la droite \n2)vers la gauche")
-            reponse_1_1 = int(input("Que choisissez-vous? (sélectionnez le numéro) : "))
-            if reponse_1_1 == attaque:
-                chance = randint(1, 100)
-                if chance > 90:
-                    pv -= 2 
-                    print("\nBonne esquive !!! Mais vous êtes tout de même touché !!!")
-                    print("Il vous reste: " + str(pv) + " pv.")
-                else:
-                    print ("\nBien esquivé!!! Vous ne subissez aucun dommage!!!")
-            if reponse_1_1 != attaque:
-                pv -= 5
-                print("\nMauvais coté...Vous subissez d'imortant dommage... ")
-            
-            else:
-                print("Choix invalide, veuillez réessayer.")
-                exit()
-    
-        #attaque
-        if stam <= 0:
-            print("\nA votre tour, choisissez votre attaque, mais vous n'avez plus d'endurance... Vous devez vous reposer")
-            stam += 20 
-        else:
-            print("\nA votre tour, choisissez votre attaque")
-            print("1)attaque vive\n2)attaque basique\n3)attaque lourde\n4)se reposer ")
-            attaque = (input("choisissez une action: "))
-            if attaque == "1":
-                stam -= 10
-                chance = randint (1,100)
-                if chance > 90 + épée:
-                    print ("\nvotre attaque échoue...")
-                else:
-                    print("\nBravo vous infligez des dégâts!!! ")
-                    pv_du_moche -= épée  
-                
-            if attaque == "2":
-                stam -= 20
-                chance = randint (1,100)
-                if chance > 80 + épée:
-                    print ("\nvotre attaque échoue...")  
-                else:
-                    print("\nBravo vous infligez des dégâts!!! ")
-                    pv_du_moche -= épée + 3
-
-            if attaque == "3":
-                stam -= 30
-                chance = randint (1,100)
-                if chance > 25 + épée:
-                    print ("\nvotre attaque échoue...") 
-                else:
-                    print("\nBravo vous infligez des dégâts!!! ")
-                    pv_du_moche -= épée + 6
-            if attaque == "4":
-                print("\nVous vous reposez et regagnez de l'endurance")
-                stam += 30     
-            else:
-                print("Choix invalide.")
-                exit()  
-    if pv <= 0:
-        print("\nVous êtes mort... GAME OVER!!!")
-        exit()
 
     if pv_du_moche <= 0:
         print("\nFélicitation, vous avez vaincu l'ennemi !!!")
@@ -355,7 +365,7 @@ if int(reponse_1) == 1:
         print("Vous décidez de : ")
         print("1) Incerez l'amulette.\n 2) Incerez votre sexe.")   
         reponse_1 = input("Que choisissez vous? (sélectionnez le numéro): ")
-        
+    
         if int(reponse_1) == 1:
             print("\nVous insérez l'amulette dans l'encoche...")
             print("Un éclat de lumière aveuglante emplit la pièce...")
@@ -365,7 +375,7 @@ if int(reponse_1) == 1:
             print("FIN DU JEU !!!")
             print("Ecrit et réalisé par Thomas et Adam.")
             exit()
-        
+    
         if int(reponse_1) == 2:
             print("\nVous insérez votre sexe dans l'encoche...")
             print("Vous sentez une douleur intense...")
@@ -374,11 +384,11 @@ if int(reponse_1) == 1:
             print("Vous avez détruit l'intermonde et êtes condamné à errer pour l'éternité...")
             exit()
 
-        else:
-            print("Choix invalide.")
+        elif int(reponse_1_1) != 1 and int(reponse_1_1) != 2:
+            print("Choix invalide!")
             exit()
 
-    
+
 if int(reponse_1) == 2:
     print("\nVous n'avez plus rien à faire ici et descidez de partir" )
     print("Vous quittez la grotte et marchez dans la nuit sombre...")
@@ -388,13 +398,13 @@ if int(reponse_1) == 2:
     print("Vous sortez votre épée et vous vous suicidez...")
     print("GAME OVER!!!")
     exit()
-    
-    
 
-else:
-    print("Choix invalide.")
+elif int(reponse_1) != 1 and int(reponse_1) != 2:
+    print("Choix invalide!")
     exit()
        
+
+
             
             
         
