@@ -1,0 +1,14 @@
+pseudo = input("entrez votre pseudo: ")
+cara = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN"
+
+
+def verif (pseudo, cara):
+    if pseudo ==3:
+        exit()
+    for i in range (len(pseudo)):
+        if pseudo[i] not in cara:
+            pseudo = input("Speudo invalide, réessayez: ")
+            verif (pseudo, cara)
+    print ("speudo correcte")
+           
+verif (pseudo, cara)
