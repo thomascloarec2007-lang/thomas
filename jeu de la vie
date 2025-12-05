@@ -1,0 +1,71 @@
+largeur = 0
+hauteur = 0
+largeur = int(input("largeur: "))
+hauteur = int(input("hauteur: "))
+
+def jeu_de_la_vie (largeur, hauteur):
+    
+    for i in range (hauteur+ 1):
+        ligne = []
+        for k in range (largeur+1):
+            ligne.append(0)
+        print(ligne)
+   
+
+jeu_de_la_vie (largeur, hauteur)
+
+nombre_de_mod = 0
+nombre_de_mod = int(input("nombre de modification: "))
+
+
+def modification(nombre_de_mod):
+    co_tmp_x = 0 
+    co_tmp_y = 0 
+    coordonnée = []
+    for i in range (nombre_de_mod +1):
+        co_tmp_x = int(input("entrée la valeur de la coordonée x de votre modification n°"+ str(i + 1) + ": "))
+        co_tmp_y = int(input("entrée la valeur de la coordonée y de votre modification n°"+ str(i + 1) + ": "))
+        z = (co_tmp_x, co_tmp_y)
+        coordonnée.append(z)
+    print (coordonnée)
+
+    return (coordonnée)
+
+coordonnée = modification(nombre_de_mod)
+
+
+def nv_tableau(largeur, hauteur, coordonnée):
+
+    
+        
+        for i in range (hauteur+ 1):
+            if coordonnée(0)(1) == i:
+            
+                ligne[coordonnée(0)].append("X")
+
+            else:
+                ligne = []
+                for k in range (largeur+1):
+                    ligne.append(0)
+            print(ligne)
+
+
+
+        
+
+
+
+
+"""""
+def jeu_de_la_vie (largeur, hauteur):
+    ligne = []
+    tmp = 0
+    while tmp != largeur:
+        ligne.append(0)
+        tmp += 1
+    tmp = 0
+    while tmp != hauteur:
+        print(ligne)
+        tmp += 1
+
+jeu_de_la_vie (largeur, hauteur)"""
