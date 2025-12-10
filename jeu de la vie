@@ -3,6 +3,15 @@ hauteur = 0
 largeur = int(input("largeur: "))
 hauteur = int(input("hauteur: "))
 
+def affichage (tableau):
+    
+    for i in range (len(tableau)):
+        ligne = ""
+        for k in range (len(tableau[i])):
+            ligne = ligne + str(tableau[i][k][0]) + "|"
+        print (ligne)
+    print("\r")
+
 def jeu_de_la_vie (largeur, hauteur):
     tableau = []
     ligne = []
@@ -14,7 +23,7 @@ def jeu_de_la_vie (largeur, hauteur):
         tableau.append(ligne)
         ligne = []
         
-    print (tableau)
+    affichage (tableau)
     return tableau
 
 tableau = jeu_de_la_vie (largeur, hauteur)
@@ -48,7 +57,55 @@ def modification_tabelau(tableau, coordonnée, nombre_de_mod):
         y = coordonnée[i][1]
         print (x, y)
         tableau[y-1][x-1]= "X"
-    print (tableau)
+    affichage (tableau)
     return tableau
 
 modification_tabelau(tableau, coordonnée, nombre_de_mod)
+
+def regle_du_jeu (tableau):
+    for i in range (len(tableau)):
+        for k in range (len(tableau[i])):
+            case_autour = []
+            
+
+            if i-1 >= 0 and i-1 <= len(tableau)-1:
+                if k-1 >=0 and k-1 <= len(tableau[i])-1:
+                    case_autour.append(tableau[i-1][k-1])
+
+                if k >=0 and k <= len(tableau[i])-1:
+                    case_autour.append(tableau[i-1][k])
+
+                if k+1 >=0 and k+1 <= len(tableau[i])-1:
+                    case_autour.append(tableau[i-1][k+1])
+
+            if i >= 0 and i <= len(tableau)-1:
+                if k-1 >=0 and k-1 <= len(tableau[i])-1:
+                    case_autour.append(tableau[i][k-1])
+
+                if k+1 >=0 and k+1 <= len(tableau[i])-1 :
+                    case_autour.append(tableau[i][k+1])
+                
+            if i+1  >= 0 and i+1 <= len(tableau)-1:
+                if k-1 >=0 and k-1 <= len(tableau[i])-1:
+                    case_autour.append(tableau[i+1][k-1])
+
+                if k >=0 and k <= len(tableau[i])-1:
+                    case_autour.append(tableau[i+1][k])
+
+                if k+1 >=0 and k+1 <= len(tableau[i])-1:
+                    case_autour.append(tableau[i+1][k+1])
+            
+            
+
+            nbr_case_vie = 0
+            for t in range (len(case_autour)):
+                if case_autour[t] == "X":
+                    nbr_case_vie += 1
+            
+            if tableau[i][k] =="X":
+                print (case_autour)
+                print (nbr_case_vie)
+
+            
+regle_du_jeu (tableau)
+
