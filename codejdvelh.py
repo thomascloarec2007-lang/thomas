@@ -5,13 +5,13 @@ from random import randint
 pv = 20
 épée = 2
 stam = 100
-inventaire = [["amullette"]]
+inventaire = ["amullette"]
 
 info_joueur = {"pv":pv, "épée": épée, "stam": stam, "inventaire":inventaire}
 
 
 def reponse (diff_choix):
-    valeur_accepter = []
+    valeur_accepter = ['exit', "restart"]
     for i in range (len(diff_choix)):
         tmp = i + 1
         print (str(tmp) + ")" + diff_choix[i])
@@ -20,6 +20,14 @@ def reponse (diff_choix):
     rep_user = input("Entrez votre choix: ")
     if rep_user == "exit":
         print("Aurevoir!")
+        exit()
+    elif rep_user ==  "restart":
+        pv = 20
+        épée = 2
+        stam = 100
+        inventaire = ["amullette"]
+        info_joueur = {"pv":pv, "épée": épée, "stam": stam, "inventaire":inventaire}
+        jeu(info_joueur)
         exit()
     elif rep_user not in valeur_accepter:
         print("Veuillez choisir une repponse correcte ou entrer 'exit' pour quitter le programme.")
@@ -55,13 +63,14 @@ def pseudo (insulte, info_joueur):
                       
     if insulte == True:
         print("Bon toutou!")
+        
     info_joueur["nom"] = nom
     return info_joueur
 
 # Introduction
 def intro (info_joueur):
     print("Bienvenue dans ce jeu !")
-    print("Vous pouvez le quittter à tout moment en tapant une réponse non conforme.")
+    print("Vous pouvez le quittter à tout moment en tapant 'exit'.")
 
 
     print("\nVous vous réveillez amnésique et affaibli en dessous d'un grand arbre en ammont d'une colline arride ")
@@ -76,14 +85,13 @@ def partie_1 (info_joueur):
     print("A l'ouest: une intense source de lumière blanche.")
     print("Vous décidez:")
     diff_choix = ["de vous réfugier", "de retrouver d'où vous venez"]
+   
     reponse_1 = reponse (diff_choix)
     if reponse_1 == "1":
         branche1 (info_joueur)
     if reponse_1 == "2":
-        branche2(info_joueur)
+        pont(info_joueur)
 
-
-    
 
 
     # Branche 1 -> grotte 
@@ -97,7 +105,16 @@ def branche1 (info_joueur):
     if reponse_1_1 == "2":
         raison = "mort de froid"
         mort(raison)
-    
+
+def pont (info_joueur):
+    print("Vous vous retrouvé bloqué par une rivière. Il vous faut la traverser.")
+    print("Vous pouvez: ")
+    diff_choix = []
+
+
+    branche2 (info_joueur)
+
+
 
     # Branche 2 -> lumière          
 def branche2 (info_joueur):  
@@ -115,6 +132,8 @@ def branche2 (info_joueur):
         branche2_1(info_joueur)
     if reponse_1_1 == "2":
         branche2_2(info_joueur)
+   
+
 
 # Branche 1-1
 def branche1_1(info_joueur):
@@ -148,6 +167,7 @@ def branche2_2(info_joueur):
     pv_du_moche = 10
     raison = "Le sale moche vous a tué..."
     num_combat = 1
+   
     combat(info_joueur, pv_du_moche, raison, num_combat)
     
 
@@ -175,7 +195,8 @@ def deffense (info_joueur, raison ):
             info_joueur["pv"] -= 5
             print("\nMauvais coté...Vous subissez d'imortant dommage... ")
             print("Il vous reste: " + str(info_joueur["pv"]) + " pv.")
-        
+
+
     if info_joueur["pv"] <= 0:
         mort(raison)
     return info_joueur
@@ -261,9 +282,10 @@ def fin_combat_1 (info_joueur):
             print("\nVous mangez et vous vous restaurez.")
     if reponse_1_1 == "2":
             print("\nVous laissez la nourriture pour le prochain.")
-    
+  
     print("\nVous êtes encore completement perdu mais au moins vous êtes en vie...")   
     print("La nuit commence à tomber, vous décidez de chercher un abris pour la nuit...")  
+    
     branche1 (info_joueur)
 
 
@@ -281,7 +303,6 @@ def partie_2(info_joueur):
     print("Elle ne semble pas hostile...\nElle vous fait signe de vous approcher... \nVous vous avancez prudemment...")
     print("\n'Cela fait bien longtemps que je n'ai pas vu un mortel...' dit la créature d'une voix rauque." )
     print("'Je suis l'Archiviste, gardien des savoirs oubliés de cet intermonde.'" )
-
     print("Vous demandez:")
 
     diff_choix = ["pouvez vous me parlez plus de ce qu'est cet intermonde?", "Mais qui êtes vous au juste?"]
@@ -290,6 +311,7 @@ def partie_2(info_joueur):
         branche2_1_1(info_joueur)
     if reponse_1 == "2":
         branche2_1_2(info_joueur)
+   
 
 #brance 2-1
 
@@ -318,6 +340,7 @@ def branche2_2_1(info_joueur):
         branche2_3_1(info_joueur)
     if reponse_1 == "2":
         branche2_3_2(info_joueur)
+  
 #suicide 
 def branche2_3_2(info_joueur):
     print("\nVous n'avez plus rien à faire ici et descidez de partir" )
@@ -342,6 +365,7 @@ def branche2_3_1(info_joueur):
     num_combat = 2
     pv_du_moche = 100
     raison = "Le monstre vous a tué... Il semble bien trop fort, ou bien VOUS êtes bien trop faible."
+
     combat(info_joueur,pv_du_moche, raison, num_combat)
     
 def fin_combat_2():
@@ -354,7 +378,7 @@ def fin_combat_2():
     print("Vous repérez une encoche en forme de serrure au centre de la porte...")
     print("Vous décidez de : ")
 
-    diff_choix = ["incerez l'amulette", "incerez votre sexe."]
+    diff_choix = ["incerez l'amulette", "incerez votre 'avant bras'."]
     reponse_1 = reponse(diff_choix)
     
     if reponse_1 == "1":
@@ -369,13 +393,14 @@ def fin_combat_2():
         exit()
     
     if reponse_1 == "2":
-        print("\nVous insérez votre sexe dans l'encoche...")
+        print("\nVous insérez votre 'avant bras' dans l'encoche...")
         print("Vous sentez une douleur intense...")
         print("Puis une lumière aveuglante emplit la pièce...")
         raison = ("Votre sex est apparement bien trop massif pour se monde...")
         mort(raison)
+  
 
-        
+    
 def jeu (info_joueur): 
     insulte = False
     pseudo (insulte, info_joueur)
