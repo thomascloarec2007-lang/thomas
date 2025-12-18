@@ -4,17 +4,48 @@ from random import randint
 pv = 20
 épée = 2
 stam = 100
+
 inventaire = ["amullette", "épée"]
 
 info_joueur = {"pv":pv, "épée": épée, "stam": stam, "inventaire":inventaire}
 
+
+
+
+#fonction triche
+def triche (insulte, info_joueur):
+
+    reponse_1 = input(print("Choisisez la fonction que vous voulez atteindre, entre intro, combat1 (étrangé), combat2(gardien), partie2, pseudo, fin_du_jeu "))
+    info_joueur["nom"] = "joeur214"
+    if reponse_1 =="intro" or "1":
+        def intro(info_joeur)
+    if reponse_1 =="combat1" or "2":
+        pv_du_moche = 10
+        raison = "Le sale moche vous a tué..."
+        num_combat = 1
+        combat(info_joueur, pv_du_moche, raison, num_combat)
+
+    if reponse_1 =="combat2(gardien)" or "3":
+        num_combat = 2
+        pv_du_moche = 50
+        raison = "Le monstre vous a tué... Il semble bien trop fort, ou bien VOUS êtes bien trop faible."
+        combat(info_joueur, pv_du_moche, raison, num_combat)
+
+    if reponse_1 =="partie2" or "4":
+        partie_2(info_joueur)
+    if reponse_1 =="pseudo" or "5":
+        pseudo (insulte, info_joueur)
+    if reponse_1 =="fin_du_jeu" or "6":
+        fin_combat_2()
+    else:
+        triche(info_joeur)
 
 #focntion quand joeur ouvre son inventaire
 def inventaire(info_joueur):
     action = False
     print ("Vous avez dans votre inventaire: ")
     for i in range (len(info_joueur["inventaire"])):
-        print (str(i+1) + ") " + str(info_joueur["inventaire"][i]))
+        print ((str(i+1) + ") " + str(info_joueur["inventaire"][i]))
         if info_joueur["inventaire"][i] == "potions":
             action = True
             tmp = i
@@ -37,7 +68,7 @@ def reponse (diff_choix):
     valeur_accepter = []
     for i in range (len(diff_choix)):
         tmp = i + 1
-        print (str(tmp) + ")" + diff_choix[i])
+        print ((str(tmp)) + ")" + str(diff_choix[i]))
         valeur_accepter.append(str(tmp))
 
     rep_user = input("Entrez votre choix : ")
@@ -288,14 +319,16 @@ def attaque (info_joueur, pv_du_moche):
         if info_joueur["stam"] < 15:
             print("Vous vous sentez fatigué...")
 
-        return info_joueur, pv_du_moche
+    return (info_joueur, pv_du_moche)
 
 
 def combat(info_joueur, pv_du_moche, raison, num_combat):  
     
     while pv_du_moche > 0:
         deffense(info_joueur, raison)
+        print ("Il vous reste " + str(info_joueur["pv"]) + "pv, ainsi que " + str(info_joueur["stam"]) + "de stamina." )
         pv_du_moche_tmp = attaque (info_joueur, pv_du_moche)
+
         pv_du_moche = pv_du_moche_tmp[1]
     if num_combat == 1:
         fin_combat_1 (info_joueur)
@@ -388,17 +421,17 @@ def branche2_3_1(info_joueur):
     print("Vous devez vous battre pour votre survie !!!")
     print("\nLe monstre s'élance vers vous !!!")
     num_combat = 2
-    pv_du_moche = 100
+    pv_du_moche = 50
     raison = "Le monstre vous a tué... Il semble bien trop fort, ou bien VOUS êtes bien trop faible."
     combat(info_joueur, pv_du_moche, raison, num_combat)
 
 def fin_combat_2():
     print("\nFélicitations, vous avez vaincu l'ennemi !!!")
-    print("En mourant, la créature murmure : « Peut-être qu'un jour tu comprendras le fardeau que tu portes... »")
+    print("En mourant, la créature murmure : « Peut-être qu'un jour tu comprendras le fardeau que tu possède... »")
     print("Vous sentez une étrange paix vous envahir...")
     print("Vous continuez votre chemin, l'amulette brillant faiblement autour de votre cou...")
-    print("Alors, vous tombez nez à nez avec une structure qui s'apparente à une porte...")
-    print("En vous approchant, vous discernez des inscriptions anciennes gravées sur le cadre de la porte...")
+    print("Alors, vous tombez nez à nez avec une structure qui s'apparente à un portaille...")
+    print("En vous approchant, vous discernez des inscriptions anciennes gravées sur le cadre de la structure...")
     print("Vous repérez une encoche en forme de serrure au centre de la porte...")
     print("Vous décidez de : ")
 
@@ -426,14 +459,19 @@ def fin_combat_2():
 
 def jeu (info_joueur): 
     insulte = False
-    pseudo (insulte, info_joueur)
-    intro (info_joueur)
+    triche_activé = input("Voulez vous trichez?")
+    if triche_activé = "oui":
+        triche (insulte, info_joueur)
+    else: 
+        pseudo (insulte, info_joueur)
+        intro (info_joueur)
     
-    print("En vous reveillant vous avez une soudaine envie de jouer au jeu de la vie (oui je vais rentabiliser les heures mis dans de projet donc tu va bien y jouer)")
-    jeu_de_la_vie()
+    
 
 jeu(info_joueur)
 
+print("En vous reveillant vous avez une soudaine envie de jouer au jeu de la vie (oui je vais rentabiliser les heures mis dans de projet donc tu va bien y jouer)")
+    jeu_de_la_vie()
 
 def jeu_de_la_vie ():
     largeur = 0
@@ -594,5 +632,4 @@ def jeu_de_la_vie ():
         tabeleau_modi (tableau)
         tour += 1
     
-
 
