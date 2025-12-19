@@ -15,37 +15,41 @@ info_joueur = {"pv":pv, "épée": épée, "stam": stam, "inventaire":inventaire}
 #fonction triche
 def triche (insulte, info_joueur):
 
-    reponse_1 = input(print("Choisisez la fonction que vous voulez atteindre, entre intro, combat1 (étrangé), combat2(gardien), partie2, pseudo, fin_du_jeu "))
-    info_joueur["nom"] = "joeur214"
-    if reponse_1 =="intro" or "1":
-        def intro(info_joeur)
-    if reponse_1 =="combat1" or "2":
+    reponse_1 = input(print("Choisisez la fonction que vous voulez atteindre, entre: \n1)intro\n2)combat1 (étrangé)\n3)combat2(gardien)\n4)partie2\n5)pseudo\n6)fin_du_jeu "))
+    info_joueur["nom"] = "joueur214"
+    if reponse_1 =="intro" or reponse_1 =="1":
+        intro(info_joueur)
+
+    if reponse_1 =="combat1" or reponse_1 =="2":
         pv_du_moche = 10
         raison = "Le sale moche vous a tué..."
         num_combat = 1
         combat(info_joueur, pv_du_moche, raison, num_combat)
 
-    if reponse_1 =="combat2(gardien)" or "3":
+    if reponse_1 =="combat2(gardien)" or reponse_1 =="3":
         num_combat = 2
         pv_du_moche = 50
         raison = "Le monstre vous a tué... Il semble bien trop fort, ou bien VOUS êtes bien trop faible."
         combat(info_joueur, pv_du_moche, raison, num_combat)
 
-    if reponse_1 =="partie2" or "4":
+    if reponse_1 =="partie2" or reponse_1 =="4":
         partie_2(info_joueur)
-    if reponse_1 =="pseudo" or "5":
+
+    if reponse_1 =="pseudo" or reponse_1 =="5":
         pseudo (insulte, info_joueur)
-    if reponse_1 =="fin_du_jeu" or "6":
+
+    if reponse_1 =="fin_du_jeu" or reponse_1 =="6":
         fin_combat_2()
     else:
-        triche(info_joeur)
+        triche(info_joueur)
+    return
 
 #focntion quand joeur ouvre son inventaire
 def inventaire(info_joueur):
     action = False
     print ("Vous avez dans votre inventaire: ")
     for i in range (len(info_joueur["inventaire"])):
-        print ((str(i+1) + ") " + str(info_joueur["inventaire"][i]))
+        print (str(i+1) + ") " + str(info_joueur["inventaire"][i]))
         if info_joueur["inventaire"][i] == "potions":
             action = True
             tmp = i
@@ -113,8 +117,6 @@ def pseudo (insulte, info_joueur):
 
 # Introduction
 def intro (info_joueur):
-    print("Bienvenue dans ce jeu !")
-    print("Vous pouvez le quitter à tout moment en tapant une réponse non conforme.")
 
     print("\nVous vous réveillez amnésique et affaibli en dessous d'un grand arbre en amont d'une colline aride.")
     print("Vous regardez vos effets personnels.")
@@ -256,7 +258,6 @@ def deffense (info_joueur, raison):
         if int(reponse_1_1) != attaque:
             info_joueur["pv"] -= 5
             print("\nMauvais côté... Vous subissez d'importants dommages...")
-            print("Il vous reste : " + str(info_joueur["pv"]) + " pv.")
         
     if info_joueur["pv"] <= 0:
         mort(raison)
@@ -268,7 +269,7 @@ def deffense (info_joueur, raison):
 # fonction pour la partie attaque du combat
 def attaque (info_joueur, pv_du_moche):
     if info_joueur["stam"] <= 0:
-        print("\nÀ votre tour, choisissez votre attaque, mais vous n'avez plus d'endurance... Vous devez vous reposer.")
+        print("\nC'est à votre tour d'attaquer, mais vous n'avez plus d'endurance... Vous devez vous reposer.")
         info_joueur["stam"] += 20 
     else:
         print("\nÀ votre tour, choisissez votre attaque.")
@@ -326,7 +327,7 @@ def combat(info_joueur, pv_du_moche, raison, num_combat):
     
     while pv_du_moche > 0:
         deffense(info_joueur, raison)
-        print ("Il vous reste " + str(info_joueur["pv"]) + "pv, ainsi que " + str(info_joueur["stam"]) + "de stamina." )
+        print ("Il vous reste " + str(info_joueur["pv"]) + " pv, ainsi que " + str(info_joueur["stam"]) + " de stamina." )
         pv_du_moche_tmp = attaque (info_joueur, pv_du_moche)
 
         pv_du_moche = pv_du_moche_tmp[1]
@@ -443,10 +444,10 @@ def fin_combat_2():
         print("Un éclat de lumière aveuglante emplit la pièce...")
         print("Lorsque la lumière se dissipe, vous vous retrouvez dans un endroit familier...")
         print("Vous êtes de retour dans le monde des vivants, avec des souvenirs retrouvés et une nouvelle appréciation pour la vie.")
-        print("Félicitations, vous avez trouvé la paix et la rédemption !")
-        print("FIN DU JEU !!!")
-        print("Écrit et réalisé par Thomas et Adam.")
-        print ("-----------------------------------FIN---------------------------------------\n\n")
+        print("Félicitations, vous avez trouvé la paix et la rédemption !\n\n\n")
+        chapitre2(info_joueur)
+    
+
     
     if reponse_1 == "2":
         print("\nVous insérez votre machin dans l'encoche...")
@@ -457,21 +458,52 @@ def fin_combat_2():
 
 
 
-def jeu (info_joueur): 
-    insulte = False
-    triche_activé = input("Voulez vous trichez?")
-    if triche_activé = "oui":
-        triche (insulte, info_joueur)
-    else: 
-        pseudo (insulte, info_joueur)
-        intro (info_joueur)
-    
-    
 
-jeu(info_joueur)
 
-print("En vous reveillant vous avez une soudaine envie de jouer au jeu de la vie (oui je vais rentabiliser les heures mis dans de projet donc tu va bien y jouer)")
-    jeu_de_la_vie()
+
+def chapitre2(info_joueur):
+    print("----------------------------CHAPITRE II------------------------------")
+    print("En vous révéyant vos souvenires vous reviennent.")
+    print("Vous vous rappellez de TOUT, votre famille, vos amis et même votre plus grande passion, le jeu video.")
+    print("Mais... Vous n'avez pas oubliez ce que vous venez de vivre...")
+    print("Alors vous assaye de comprendre ce qu'il vient de ce passer")
+    print("Après vous être cresé les méninges, vous comprenez (infin) que vous étiez apparement mort ou du moins presque mort...")
+    print("Vous vous demandez donc tout naturelement comment vous auriez pue mourir")
+    print("Vous descidez de regarder votre historique internet et apparement, votre dernière recherche porte sur une chaine youtube au nom de EGO...")
+    print("Vous ne conaissez pourtant pas ce youtubeur, alors vous cliquez et votre ordinateur lance une video qui parle d'un certain jeu, le jeu de la vie... ")
+    print("Y a t'il un rapport entre ce jeu et votre mort??? Seul vous pouvez le déterminer")
+    diff_choix = ["continuer les recherches", "en rester là et être dans l'ignorance"]
+    reponse_1 = reponse(diff_choix)
+    if reponse_1 == "1":
+        recherche_cause_mort(info_joueur)
+    if reponse_1 == "2":
+        print("Vous reprenez le cours de votre vie, et restez dans le déni")
+        raison = "Vous mourrez à cause d'une torsion testiculaire peut après que votre femme vous quitte pour votre frère"
+        mort (raison)
+
+def recherche_cause_mort(info_joueur): 
+    print("Vous descidez de faire vos propres recherche sur ce jeu, donc vous l'installé.")
+    print("Lors du lancement, votre écran ce met à buger, des terminaux s'ouvrent dans tout les senses!!!")
+    print("Alors une fenêtre s'ouvre est vous demande: ")
+    chance = 0
+    while chance < 3:
+        print("\nil vous reste "+str(3 - chance)+" éssaie")
+        reponse_1 = input("Entrez PASSWORD: ")
+        
+        if reponse_1 == "PASSWORD" or reponse_1 == "password": 
+            chance = 10
+            print("'MOT DE PASSE CORRECTE' s'affiche sûr l'écran")
+            print ("Le jeu de la vie de lance correctement\n\n")
+            jeu_de_la_vie()
+            exit()
+        chance += 1
+    print("\n3 erreurs... c'est pas bon signe... Votre pc commence à faire du bruit... que dis-je, à VROMBIRE, BOUF BOUF BOUF!!!")
+    print("Puis une énorme explosion se preduit ... ")
+    print("Soudain ...\n")
+    intro(info_joueur)
+
+
+
 
 def jeu_de_la_vie ():
     largeur = 0
@@ -501,11 +533,13 @@ def jeu_de_la_vie ():
 
     tableau = tableau (largeur)
     
-    nombre_de_mod = 0
-    nombre_de_mod = int(input("nombre de modification: "))
+
+    
 
 
-    def modification(nombre_de_mod,largeur ):
+    def modification(largeur):
+        nombre_de_mod = 0
+        nombre_de_mod = int(input("nombre de modification: "))
         cara = []
         for i in range (largeur):
             cara.append(i+1)
@@ -540,6 +574,7 @@ def jeu_de_la_vie ():
     tableau = modification_tabelau(tableau, coordonnée, nombre_de_mod)
 
     def tabeleau_modi(tableau):
+        
         mort = []
         vie = []
         x = 0
@@ -589,26 +624,22 @@ def jeu_de_la_vie ():
                 for h in range (len(tmp)):
                     if tmp[h] == ["X"]:
                         nbr_case_en_vie += 1
-                
 
-                if tableau[i][k] == ["X"]:
-                    print  (tmp)
-                    print(nbr_case_en_vie)
-                    print (i,k)
-
+                   
+                    
                 coordonnée = (k, i)
 
                 if tableau[i][k] == ["X"] and nbr_case_en_vie < 2:
                     mort.append(coordonnée)
-                    print ("teste1")
+                
 
                 if tableau[i][k] == ["X"]and nbr_case_en_vie > 3:
                     mort.append(coordonnée)
-                    print ("teste2")
+                    
 
                 if tableau[i][k] == [0] and nbr_case_en_vie == 3:
                     vie.append(coordonnée)
-                    print ("teste3")
+                   
 
 
         #remplace case vivante en morte
@@ -631,5 +662,21 @@ def jeu_de_la_vie ():
     while tour != nbr_de_tour:
         tabeleau_modi (tableau)
         tour += 1
-    
+    modification(largeur )
+
+
+
+def initialisation_jeu ():
+    insulte = False
+    triche_activé = input("Voulez vous trichez?: ")
+    if triche_activé == "oui" or triche_activé == "OUI":
+        triche (insulte, info_joueur)
+    else: 
+        print("Bienvenue dans ce jeu !")
+        print("Vous pouvez le quitter à tout moment en tapant 'exit'.")
+        pseudo(insulte, info_joueur)
+        intro(info_joueur)
+
+
+initialisation_jeu()
 
